@@ -25,10 +25,17 @@ class Usuario {
     }
 
     /**
-     * Verifica que la contraseña ingresada coincida con la del usuario.
+     * @return El nombre del usuario.
      */
-    public Boolean verificarContrasena() throws Exception {
-        throw new Exception("Sin implementar");
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+
+    /**
+     * @return La contraseña del usuario.
+     */
+    public String getContrasena() {
+        return contrasena;
     }
 
     @Override
