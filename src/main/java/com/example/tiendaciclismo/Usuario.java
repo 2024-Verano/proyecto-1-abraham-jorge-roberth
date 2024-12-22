@@ -14,6 +14,16 @@ class Usuario {
      */
     private final String contrasena;
 
+
+    /**
+     * @param nombreUsuario El nombre del usuario.
+     * @param contrasena La contraseña con la cual el usuario iniciará sesión.
+     */
+    public Usuario(String nombreUsuario, String contrasena) {
+        this.nombreUsuario = nombreUsuario;
+        this.contrasena = contrasena;
+    }
+
     /**
      * Verifica que la contraseña ingresada coincida con la del usuario.
      */
