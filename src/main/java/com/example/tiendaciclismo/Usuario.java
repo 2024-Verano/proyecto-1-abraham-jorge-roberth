@@ -7,12 +7,12 @@ class Usuario {
     /**
      * El nombre del usuario
      */
-    private String nombreUsuario;
+    private final String nombreUsuario;
 
     /**
      * La contrasena del usuario
      */
-    private String contrasena;
+    private final String contrasena;
 
     /**
      * Verifica que la contraseña ingresada coincida con la del usuario.
