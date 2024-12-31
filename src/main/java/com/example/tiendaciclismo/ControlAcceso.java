@@ -13,7 +13,7 @@ class ControlAcceso {
     /**
      * Lista de usuarios.
      */
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
 
     public ControlAcceso() throws ControlAccesoException{
         try {
