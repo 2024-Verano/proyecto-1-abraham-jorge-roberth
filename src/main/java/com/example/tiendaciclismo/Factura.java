@@ -1,5 +1,7 @@
 package com.example.tiendaciclismo;
 
+import java.util.ArrayList;
+
 
 class Factura {
     /**
@@ -10,5 +12,5 @@ class Factura {
     /**
      * El detalle de la factura
      */
-    private List<DetalleFactura> detalles;
+    private ArrayList<DetalleFactura> detalles;
 }

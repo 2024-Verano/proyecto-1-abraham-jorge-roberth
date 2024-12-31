@@ -1,39 +1,46 @@
 package com.example.tiendaciclismo;
 
+import java.util.ArrayList;
+
 
 class Facturacion {
     /**
      * Lista de facturas.
      */
-    private List<Factura> facturas;
+    private ArrayList<Factura> facturas;
 
     /**
      * Crea una factura
      */
-    public Factura agregarFactura() {
+    public Factura agregarFactura() throws Exception {
+        throw new Exception("Sin implementar");
     }
 
     /**
      * Busca una factura por numero.
      */
-    public Factura buscarPorNumero() {
+    public Factura buscarPorNumero() throws Exception {
+        throw new Exception("Sin implementar");
     }
 
     /**
      * Busca facturas por fecha.
      */
-    public List<Factura> buscarPorFecha() {
+    public ArrayList<Factura> buscarPorFecha() throws Exception {
+        throw new Exception("Sin implementar");
     }
 
     /**
      * Busca facturas por el nombre de cliente.
      */
-    public List<Factura> buscarPorCliente() {
+    public ArrayList<Factura> buscarPorCliente() throws Exception {
+        throw new Exception("Sin implementar");
     }
 
     /**
      * Anula una factura.
      */
-    public void anularFactura() {
+    public void anularFactura() throws Exception {
+        throw new Exception("Sin implementar");
     }
 }

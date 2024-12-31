@@ -15,6 +15,7 @@ class Usuario {
     /**
      * Verifica que la contraseña ingresada coincida con la del usuario.
      */
-    public Boolean verificarContrasena() {
+    public Boolean verificarContrasena() throws Exception {
+        throw new Exception("Sin implementar");
     }
 }

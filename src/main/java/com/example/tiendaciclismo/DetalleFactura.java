@@ -20,10 +20,10 @@ class DetalleFactura {
     /**
      * El precio de cada unidad.
      */
-    private Int precioUnidad;
+    private int precioUnidad;
 
     /**
      * El total del detalle.
      */
-    private Int total;
+    private int total;
 }
