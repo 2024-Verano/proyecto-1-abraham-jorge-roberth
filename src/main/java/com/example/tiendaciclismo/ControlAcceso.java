@@ -15,6 +15,14 @@ class ControlAcceso {
      */
     private ArrayList<Usuario> usuarios;
 
+    public ControlAcceso() throws ControlAccesoException{
+        try {
+            this.cargarUsuarios();
+        } catch (IOException e) {
+            throw new ControlAccesoException("No se pudo cargar el archivo: %s".formatted(ARCHIVO_USUARIOS));
+        }
+    }
+
     /**
      * Comprueba que el usuario provisto se encuentre en la lista de usuarios y la contraseña coincida.
      */
