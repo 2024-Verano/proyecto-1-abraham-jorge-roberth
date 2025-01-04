@@ -25,9 +25,21 @@ class ControlAcceso {
 
     /**
      * Comprueba que el usuario provisto se encuentre en la lista de usuarios y la contraseña coincida.
+     * @param nombreUsuario El nombre de usuario.
+     * @param contrasena La contraseña del usuario.
+     * @return Si el usuario existe y la contraseña es válida.
      */
-    public Boolean iniciarSesion() throws Exception {
-        throw new Exception("Sin implementar");
+    public Boolean iniciarSesion(String nombreUsuario, String contrasena) {
+        Boolean usuarioValido = false; 
+
+        for (Usuario usuario : usuarios) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario) && usuario.getContrasena().equals(contrasena)) {
+                usuarioValido = true;
+                break;
+            }
+        }
+
+        return usuarioValido;
     }
 
     /**
