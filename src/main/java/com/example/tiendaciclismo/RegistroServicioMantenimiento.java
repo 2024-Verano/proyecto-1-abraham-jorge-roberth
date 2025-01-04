@@ -4,6 +4,14 @@ import java.util.ArrayList;
 
 
 class RegistroServicioMantenimiento {
+
+    /**
+     * Guarda el último código de servicio usado.
+     * Cuando se almacena un registro, se incrementa en uno.
+     * Al cargarse la lista de registros, el código del último registro se almacena aquí.
+     */
+    private static long ultimoCodigoServicio = 0;
+
     /**
      * Es el registro de los servicios que se han creado.
      */
