@@ -8,7 +8,7 @@ import java.io.IOException;
 
 class ControlAcceso {
 
-    private static final String ARCHIVO_USUARIOS = "usuarios.acc";
+    private static final String ARCHIVO_USUARIOS = "recursos/usuarios.acc";
 
     /**
      * Lista de usuarios.
