@@ -40,14 +40,11 @@ public class ControlAccesoTest {
 	 * Test of iniciarSesion method, of class ControlAcceso.
 	 */
 	@Test
-	public void testIniciarSesion() throws Exception {
-		System.out.println("iniciarSesion");
+	public void cuando_UsuarioExisteYContrasenaEsValida_entonces_RetornaTrue() throws Exception {
 		ControlAcceso instance = new ControlAcceso();
-		Boolean expResult = null;
-		Boolean result = instance.iniciarSesion();
+		Boolean expResult = true;
+		Boolean result = instance.iniciarSesion("usuario", "contrasena");
 		assertEquals(expResult, result);
-		// TODO review the generated test code and remove the default call to fail.
-		fail("The test case is a prototype.");
 	}
 	
 }
