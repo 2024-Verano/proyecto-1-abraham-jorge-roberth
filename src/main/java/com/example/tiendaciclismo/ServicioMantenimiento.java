@@ -1,6 +1,6 @@
 package com.example.tiendaciclismo;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 class ServicioMantenimiento {
@@ -27,12 +27,12 @@ class ServicioMantenimiento {
     /**
      * Fecha en la que se recibe la bicicleta.
      */
-    private LocalDate fechaRecibido;
+    private LocalDateTime fechaRecibido;
 
     /**
      * Fecha en la que se entrega bicicleta.
      */
-    private LocalDate fechaEntrega;
+    private LocalDateTime fechaEntrega;
 
     /**
      * La condición de la bicicleta o detalles extra.
