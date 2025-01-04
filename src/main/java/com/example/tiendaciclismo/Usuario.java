@@ -2,7 +2,10 @@ package com.example.tiendaciclismo;
 
 import java.util.Objects;
 
-
+/**
+ * Clase para el almacenamiento de los usuarios en memoria.
+ * @author Roberth Rojas
+ */
 class Usuario {
     /**
      * El nombre del usuario
