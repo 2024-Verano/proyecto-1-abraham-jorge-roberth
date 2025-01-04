@@ -4,6 +4,12 @@ import java.time.LocalDateTime;
 
 
 class ServicioMantenimiento {
+
+    public enum EstadoMantenimiento {
+        ABIERTO,
+        CERRADO,
+    }
+
     /**
      * Valor numérico único que incrementa en 1.
      */
@@ -42,5 +48,5 @@ class ServicioMantenimiento {
     /**
      * Indica si el servicio está Abierto o Cerrado.  Una vez cerrado, se pasará a facturación.
      */
-    private boolean estado;
+    private EstadoMantenimiento estado;
 }
