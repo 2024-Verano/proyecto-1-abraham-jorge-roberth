@@ -47,4 +47,19 @@ public class ControlAccesoTest {
 		assertEquals(expResult, result);
 	}
 	
+        @Test
+        public void cuando_UsuarioNoExiste_entonces_RetornaFalse() throws Exception {
+		ControlAcceso instance = new ControlAcceso();
+		Boolean expResult = false;
+		Boolean result = instance.iniciarSesion("inexistente", "contrasena");
+		assertEquals(expResult, result);
+        }
+	
+        @Test
+        public void cuando_ContrasenaEsIncorrecta_entonces_RetornaFalse() throws Exception {
+		ControlAcceso instance = new ControlAcceso();
+		Boolean expResult = false;
+		Boolean result = instance.iniciarSesion("usuario", "contrasena_incorrecta");
+		assertEquals(expResult, result);
+        }
 }
