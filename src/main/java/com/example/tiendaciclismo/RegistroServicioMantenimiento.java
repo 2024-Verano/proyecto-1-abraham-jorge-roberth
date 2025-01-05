@@ -45,8 +45,16 @@ class RegistroServicioMantenimiento {
     /**
      * Busca el cliente por medio del nombre de este.
      */
-    public ArrayList<ServicioMantenimiento> buscarCliente() throws Exception {
-        throw new Exception("Sin implementar");
+    public ArrayList<ServicioMantenimiento> buscarPorCliente(Cliente cliente) throws Exception {
+        ArrayList<ServicioMantenimiento> resultados = new ArrayList<>();
+
+        for (ServicioMantenimiento servicioMantenimiento : serviciosMantenimiento) {
+            if (servicioMantenimiento.getCodigoCliente() == cliente.getCodigo()) {
+                resultados.add(servicioMantenimiento);
+            }
+        }
+
+        return resultados;
     }
 
     /**
