@@ -63,4 +63,8 @@ class RegistroServicioMantenimiento {
     public void modificarServicio() throws Exception {
         throw new Exception("Sin implementar");
     }
+
+    public boolean borrarServicio(ServicioMantenimiento servicioMantenimiento) {
+        return serviciosMantenimiento.remove(servicioMantenimiento);
+    }
 }
