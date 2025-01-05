@@ -48,7 +48,7 @@ class ServicioMantenimiento {
     /**
      * Indica si el servicio está Abierto o Cerrado.  Una vez cerrado, se pasará a facturación.
      */
-    private EstadoMantenimiento estado;
+    private EstadoMantenimiento estado = EstadoMantenimiento.ABIERTO;
 
 
     public ServicioMantenimiento(long codigoServicio, long codigoCliente, String marcaBicicleta, int precio, LocalDateTime fechaRecibido, LocalDateTime fechaEntrega, String observaciones) {
@@ -59,7 +59,6 @@ class ServicioMantenimiento {
         this.fechaRecibido = fechaRecibido;
         this.fechaEntrega = fechaEntrega;
         this.observaciones = observaciones;
-        this.estado = EstadoMantenimiento.CERRADO;
     }
 
     public long getCodigoServicio() {
