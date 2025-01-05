@@ -1,5 +1,6 @@
 package com.example.tiendaciclismo;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -20,8 +21,10 @@ class RegistroServicioMantenimiento {
     /**
      * Agrega un servicio al registro de servicios 
      */
-    public ServicioMantenimiento agregarServicio() throws Exception {
-        throw new Exception("Sin implementar");
+    public void agregarMantenimiento(long codigoCliente, String marcaBicicleta, int precio, LocalDateTime fechaRecibido, LocalDateTime fechaEntrega, String observaciones) {
+        ServicioMantenimiento mantenimiento = new ServicioMantenimiento(ultimoCodigoServicio + 1, codigoCliente, marcaBicicleta, precio, fechaRecibido, fechaEntrega, observaciones);
+
+        this.serviciosMantenimiento.add(mantenimiento);
     }
 
     /**
