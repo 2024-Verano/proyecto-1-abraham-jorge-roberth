@@ -53,6 +53,7 @@ public class TiendaCiclismo {
 	java.awt.EventQueue.invokeLater(new Runnable() {
 		public void run() {
                     System.out.println("Aplicación principal");
+                    System.exit(0);
 		}
 	});
     }
