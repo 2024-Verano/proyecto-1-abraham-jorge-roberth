@@ -51,9 +51,15 @@ class ServicioMantenimiento {
     private EstadoMantenimiento estado;
 
 
-    public ServicioMantenimiento(long codigoServicio, long codigoCliente) {
+    public ServicioMantenimiento(long codigoServicio, long codigoCliente, String marcaBicicleta, int precio, LocalDateTime fechaRecibido, LocalDateTime fechaEntrega, String observaciones) {
         this.codigoServicio = codigoServicio;
         this.codigoCliente = codigoCliente;
+        this.marcaBicicleta = marcaBicicleta;
+        this.precio = precio;
+        this.fechaRecibido = fechaRecibido;
+        this.fechaEntrega = fechaEntrega;
+        this.observaciones = observaciones;
+        this.estado = EstadoMantenimiento.CERRADO;
     }
 
     public long getCodigoServicio() {
