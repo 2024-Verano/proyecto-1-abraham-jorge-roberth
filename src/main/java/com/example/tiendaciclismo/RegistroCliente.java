@@ -1,60 +1,92 @@
 package com.example.tiendaciclismo;
 
 import java.util.ArrayList;
-
+import java.util.Optional;
 
 class RegistroCliente {
     /**
      * Lista de los clientes creados
      */
-    private ArrayList<Cliente> cliente;
+    private ArrayList<Cliente> clientes;
+
+    public RegistroCliente() {
+        clientes = new ArrayList<>();
+    }
 
     /**
      * Se busca al cliente por codigo.
      */
-    public Cliente buscarPorCodigo() throws Exception {
-        throw new Exception("Sin implementar");
+    public Cliente buscarPorCodigo(long codigo) throws Exception {
+        return clientes.stream()
+                .filter(cliente -> cliente.getCodigo() == codigo)
+                .findFirst()
+                .orElseThrow(() -> new Exception("Cliente con código " + codigo + " no encontrado."));
     }
 
     /**
      * Se busca al cliente por su nombre
      */
-    public Cliente buscarPorNombre() throws Exception {
-        throw new Exception("Sin implementar");
+    public Cliente buscarPorNombre(String nombre) throws Exception {
+        return clientes.stream()
+                .filter(cliente -> cliente.getNombre().equalsIgnoreCase(nombre))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Cliente con nombre " + nombre + " no encontrado."));
     }
 
     /**
      * Se busca al cliente por sus apellidos
      */
-    public Cliente buscarPorApellidos() throws Exception {
-        throw new Exception("Sin implementar");
+    public Cliente buscarPorApellidos(String apellidos) throws Exception {
+        return clientes.stream()
+                .filter(cliente -> cliente.getApellidos().equalsIgnoreCase(apellidos))
+                .findFirst()
+                .orElseThrow(() -> new Exception("Cliente con apellidos " + apellidos + " no encontrado."));
     }
 
     /**
-     * Se revisa si tiene facturas si ya tiene no podrá ser eliminado
+     * Se revisa si tiene facturas, si ya tiene no podrá ser eliminado
      */
-    private Facturacion verificarFacturas() throws Exception {
-        throw new Exception("Sin implementar");
+    private boolean verificarFacturas(long codigo) {
+        // Simulación de verificación de facturas. Reemplazar con lógica real
+        return false;
     }
 
     /**
      * Se elimina el cliente.
      */
-    public Cliente eliminarCliente() throws Exception {
-        throw new Exception("Sin implementar");
+    public void eliminarCliente(long codigo) throws Exception {
+        if (verificarFacturas(codigo)) {
+            throw new Exception("No se puede eliminar el cliente con código " + codigo + ", tiene facturas asociadas.");
+        }
+        Cliente cliente = buscarPorCodigo(codigo);
+        clientes.remove(cliente);
+        System.out.println("Cliente con código " + codigo + " eliminado con éxito.");
     }
 
     /**
      * Se agrega a un nuevo cliente
      */
-    public Cliente agregarCliente() throws Exception {
-        throw new Exception("Sin implementar");
+    public void agregarCliente(Cliente nuevoCliente) throws Exception {
+        Optional<Cliente> clienteExistente = clientes.stream()
+                .filter(cliente -> cliente.getCodigo() == nuevoCliente.getCodigo())
+                .findFirst();
+
+        if (clienteExistente.isPresent()) {
+            throw new Exception("Ya existe un cliente con el código " + nuevoCliente.getCodigo() + ".");
+        }
+        clientes.add(nuevoCliente);
+        System.out.println("Cliente agregado con éxito.");
     }
 
     /**
      * Se modifican atributos del cliente
      */
-    public Cliente modificarCliente() throws Exception {
-        throw new Exception("Sin implementar");
+    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, int nuevoTelefono, String nuevoCorreo) throws Exception {
+        Cliente cliente = buscarPorCodigo(codigo);
+        cliente.setNombre(nuevoNombre);
+        cliente.setApellidos(nuevosApellidos);
+        cliente.setNumTelefono(nuevoTelefono);
+        cliente.setCorreo(nuevoCorreo);
+        System.out.println("Cliente con código " + codigo + " modificado con éxito.");
     }
 }
