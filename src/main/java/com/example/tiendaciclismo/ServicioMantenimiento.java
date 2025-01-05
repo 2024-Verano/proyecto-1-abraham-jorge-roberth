@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 class ServicioMantenimiento {
 
-    public enum EstadoMantenimiento {
+    public enum Estado {
         ABIERTO,
         CERRADO,
     }
@@ -48,7 +48,7 @@ class ServicioMantenimiento {
     /**
      * Indica si el servicio está Abierto o Cerrado.  Una vez cerrado, se pasará a facturación.
      */
-    private EstadoMantenimiento estado = EstadoMantenimiento.ABIERTO;
+    private Estado estado = Estado.ABIERTO;
 
 
     public ServicioMantenimiento(long codigoServicio, long codigoCliente, String marcaBicicleta, int precio, LocalDateTime fechaRecibido, LocalDateTime fechaEntrega, String observaciones) {
@@ -109,11 +109,11 @@ class ServicioMantenimiento {
         this.observaciones = observaciones;
     }
 
-    public EstadoMantenimiento getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoMantenimiento estado) {
+    public void setEstado(Estado estado) {
         this.estado = estado;
     }
 }

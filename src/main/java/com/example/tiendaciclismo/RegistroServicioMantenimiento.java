@@ -68,7 +68,7 @@ class RegistroServicioMantenimiento {
         resultado.setFechaRecibido(fechaRecibido);
         resultado.setFechaEntrega(fechaEntrega);
         resultado.setObservaciones(marcaBicicleta);
-        resultado.setEstado(cerrado? ServicioMantenimiento.EstadoMantenimiento.CERRADO: ServicioMantenimiento.EstadoMantenimiento.ABIERTO);
+        resultado.setEstado(cerrado? ServicioMantenimiento.Estado.CERRADO: ServicioMantenimiento.Estado.ABIERTO);
     }
 
     public boolean borrarServicio(ServicioMantenimiento servicioMantenimiento) {
