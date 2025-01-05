@@ -40,11 +40,30 @@ public class TiendaCiclismo {
 		}
 		//</editor-fold>
     }
+
+    public static void ejecutarInicioSesion() {
+	java.awt.EventQueue.invokeLater(new Runnable() {
+		public void run() {
+			new VentanaInicioSesion().setVisible(true);
+		}
+	});
+    }
+
+    public static void ejecutarAplicacionPrincipal() {
+	java.awt.EventQueue.invokeLater(new Runnable() {
+		public void run() {
+                    System.out.println("Aplicación principal");
+		}
+	});
+    }
+
     public static void main(String[] args) {
         try {
             tienda = new Tienda();
         } catch (Exception e) {
             System.err.println("Fallo al inicializar, saliendo...");
         }
+
+        ejecutarInicioSesion();
     }
 }
