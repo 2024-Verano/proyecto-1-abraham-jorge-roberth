@@ -60,8 +60,15 @@ class RegistroServicioMantenimiento {
     /**
      * Modifica los atributos de un servicio
      */
-    public void modificarServicio() throws Exception {
-        throw new Exception("Sin implementar");
+    public void modificarServicio(long codigoServicio, String marcaBicicleta, int precio, LocalDateTime fechaRecibido, LocalDateTime fechaEntrega, String observaciones, boolean cerrado) {
+        ServicioMantenimiento resultado = buscarPorCodigo(codigoServicio);
+
+        resultado.setMarcaBicicleta(marcaBicicleta);
+        resultado.setPrecio(precio);
+        resultado.setFechaRecibido(fechaRecibido);
+        resultado.setFechaEntrega(fechaEntrega);
+        resultado.setObservaciones(marcaBicicleta);
+        resultado.setEstado(cerrado? ServicioMantenimiento.EstadoMantenimiento.CERRADO: ServicioMantenimiento.EstadoMantenimiento.ABIERTO);
     }
 
     public boolean borrarServicio(ServicioMantenimiento servicioMantenimiento) {
