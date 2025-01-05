@@ -45,11 +45,11 @@ class RegistroServicioMantenimiento {
     /**
      * Busca el cliente por medio del nombre de este.
      */
-    public ArrayList<ServicioMantenimiento> buscarPorCliente(Cliente cliente) throws Exception {
+    public ArrayList<ServicioMantenimiento> buscarPorCliente(long codigoCliente) {
         ArrayList<ServicioMantenimiento> resultados = new ArrayList<>();
 
         for (ServicioMantenimiento servicioMantenimiento : serviciosMantenimiento) {
-            if (servicioMantenimiento.getCodigoCliente() == cliente.getCodigo()) {
+            if (servicioMantenimiento.getCodigoCliente() == codigoCliente) {
                 resultados.add(servicioMantenimiento);
             }
         }
