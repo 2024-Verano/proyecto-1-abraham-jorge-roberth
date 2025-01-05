@@ -30,8 +30,16 @@ class RegistroServicioMantenimiento {
     /**
      * Busca el servicio por medio del código.
      */
-    public ServicioMantenimiento buscarCodigo() throws Exception {
-        throw new Exception("Sin implementar");
+    public ServicioMantenimiento buscarPorCodigo(long codigoServicioMantenimiento) {
+        ServicioMantenimiento resultado = null;
+        for (ServicioMantenimiento servicioMantenimiento : serviciosMantenimiento) {
+            if (servicioMantenimiento.getCodigoServicio() == codigoServicioMantenimiento) {
+                resultado = servicioMantenimiento;
+                break;
+            }
+        }
+
+        return resultado;
     }
 
     /**
