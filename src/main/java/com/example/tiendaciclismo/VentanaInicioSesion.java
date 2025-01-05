@@ -104,7 +104,7 @@ public class VentanaInicioSesion extends javax.swing.JFrame {
 		Tienda tienda = TiendaCiclismo.getTienda();
 
 		String nombreUsuario = fieldUsuario.getText();
-		String contrasena = pwFieldPassword.getPassword().toString();
+		String contrasena = new String(pwFieldPassword.getPassword());
 
 		Boolean autenticado = tienda.iniciarSesion(nombreUsuario, contrasena);
 
