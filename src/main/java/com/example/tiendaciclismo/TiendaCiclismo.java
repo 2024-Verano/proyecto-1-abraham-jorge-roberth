@@ -63,6 +63,7 @@ public class TiendaCiclismo {
             tienda = new Tienda();
         } catch (Exception e) {
             System.err.println("Fallo al inicializar, saliendo...");
+            System.exit(1);
         }
 
         ejecutarInicioSesion();
