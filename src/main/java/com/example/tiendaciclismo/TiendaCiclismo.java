@@ -10,7 +10,17 @@ package com.example.tiendaciclismo;
  */
 public class TiendaCiclismo {
 
+    private static Tienda tienda;
+
+    public static Tienda getTienda() {
+        return tienda;
+    }
+
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        try {
+            tienda = new Tienda();
+        } catch (Exception e) {
+            System.err.println("Fallo al inicializar, saliendo...");
+        }
     }
 }
