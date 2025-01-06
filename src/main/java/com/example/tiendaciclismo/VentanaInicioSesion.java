@@ -109,8 +109,8 @@ public class VentanaInicioSesion extends javax.swing.JFrame {
 		Boolean autenticado = tienda.iniciarSesion(nombreUsuario, contrasena);
 
 		if (autenticado) {
-			this.setVisible(false);
-			TiendaCiclismo.ejecutarAplicacionPrincipal();
+			VentanaPrincipal.create();
+			this.dispose();
 		} else {
 			this.fieldUsuario.setText("");
 			this.pwFieldPassword.setText("");
@@ -121,7 +121,7 @@ public class VentanaInicioSesion extends javax.swing.JFrame {
 	/**
 	 * @param args the command line arguments
 	 */
-	public static void main(String args[]) {
+	public static void create() {
 		/* Set the Nimbus look and feel */
 		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
 		/* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
