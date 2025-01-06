@@ -37,7 +37,7 @@ public class XML {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             Document document = builder.parse(archivo);
 
-            NodeList nodos = document.getElementsByTagName("");
+            NodeList nodos = document.getElementsByTagName(tag);
             for (int i = 0; i < nodos.getLength(); i++) {
                 Node nodo = nodos.item(i);
                 NamedNodeMap atributos = nodo.getAttributes();
