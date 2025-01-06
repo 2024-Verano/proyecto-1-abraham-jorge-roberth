@@ -8,6 +8,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.xml.parsers.DocumentBuilder;
@@ -25,13 +27,23 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import com.example.tiendaciclismo.almacenamiento.XML;
+
 class RegistroTipoProducto {
 
     /**
      * Lista de los tipos de producto creados.
      */
-    private List<TipoProducto> listaTipos = new ArrayList<>();
+    private List<TipoProducto> listaTipos;
     private long siguienteCodigo = 1;
+    private XML respaldo;
+
+    public RegistroTipoProducto() {
+        listaTipos = new ArrayList<>();
+        respaldo = new XML("datos/registro_tipos_producto.xml");
+
+        cargarRegistros();
+    }
 
     public void agregarTipoProducto(String nombre) {
 
@@ -303,6 +315,14 @@ class RegistroTipoProducto {
         } catch (TransformerException e) {
 
             return null;
+        }
+    }
+
+    private void cargarRegistros() {
+        List<Map<String,String>> registros = respaldo.leerRegistros("tipo-producto");
+
+        for (Map<String,String> registro : registros) {
+            listaTipos.add(new TipoProducto(Long.parseLong(registro.get("codigo")), registro.get("nombre")));
         }
     }
 }
