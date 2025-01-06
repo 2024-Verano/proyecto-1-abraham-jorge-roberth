@@ -112,6 +112,8 @@ public class VentanaInicioSesion extends javax.swing.JFrame {
 			this.setVisible(false);
 			TiendaCiclismo.ejecutarAplicacionPrincipal();
 		} else {
+			this.fieldUsuario.setText("");
+			this.pwFieldPassword.setText("");
 			this.labelErrorInicioSesion.setVisible(true);
 		}
         }//GEN-LAST:event_btnInicioSesionActionPerformed
