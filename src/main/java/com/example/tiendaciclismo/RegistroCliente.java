@@ -2,6 +2,7 @@ package com.example.tiendaciclismo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -71,6 +72,8 @@ class RegistroCliente {
         Cliente cliente = buscarPorCodigo(codigo);
         clientes.remove(cliente);
         System.out.println("Cliente con código " + codigo + " eliminado con éxito.");
+
+        guardarRegistros();
     }
 
     /**
@@ -86,6 +89,8 @@ class RegistroCliente {
         }
         clientes.add(nuevoCliente);
         System.out.println("Cliente agregado con éxito.");
+
+        guardarRegistros();
     }
 
     /**
@@ -98,6 +103,8 @@ class RegistroCliente {
         cliente.setNumTelefono(nuevoTelefono);
         cliente.setCorreo(nuevoCorreo);
         System.out.println("Cliente con código " + codigo + " modificado con éxito.");
+
+        guardarRegistros();
     }
 
     private void cargarRegistros() {
@@ -115,6 +122,23 @@ class RegistroCliente {
                         registro.get("distrito"),
                         LocalDate.parse(registro.get("fecha-nacimiento"))
                         ));
+        }
+    }
+
+    private void guardarRegistros() {
+        List<Map<String,String>> registros = new ArrayList<Map<String,String>>();
+
+        for (Cliente cliente : clientes) {
+            Map<String,String> registro = new HashMap<>();
+            registro.put("codigo", String.valueOf(cliente.getCodigo()));
+            registro.put("nombre", cliente.getNombre());
+            registro.put("apellidos", cliente.getApellidos());
+            registro.put("numTelefono", cliente.getNumTelefono());
+            registro.put("correo", cliente.getCorreo());
+            registro.put("provincia", cliente.getProvincia());
+            registro.put("canton", cliente.getCanton());
+            registro.put("distrito", cliente.getDistrito());
+            registro.put("fecha-nacimiento", cliente.getFechaNacimiento().toString());
         }
     }
 }
