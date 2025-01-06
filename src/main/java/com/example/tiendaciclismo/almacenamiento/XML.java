@@ -27,17 +27,29 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * La clase XML simplifica la carga y guardado de datos en archivos XML.
+ * El nodo raíz es {@code <tienda-ciclismo>}. Los nodos de almacenamiento se especifican al cargar o guardar los datos.
+ * Los atributos se registran como atributos xml.
  * @author Roberth Rojas
  */
 public class XML {
 
     private File archivo;
 
+    /**
+     * Inicializa la clase con un archivo que se usa para lectura y escritura.
+     * @param nombreArchivo Ruta del archivo a usar
+     */
     public XML(String nombreArchivo) {
         archivo = new File(nombreArchivo);
     }
 
+
+    /**
+     * Lee los registros que usan la etiqueta tag.
+     * @param tag El nombre de las etiquetas a cargar.
+     * @return Una lista de mapas con los atributos de los registros.
+     */
     public List<Map<String, String>> leerRegistros(String tag) throws ErrorCargaException {
         ArrayList<Map<String, String>> registros = new ArrayList<Map<String, String>>();
 
@@ -68,6 +80,11 @@ public class XML {
         return registros;
     }
 
+    /**
+     * Guarda los registros en el archivo especificado.
+     * @param tag El nombre de las etiquetas a cargar.
+     * @param registros Los datos que serán guardados.
+     */
     public void guardarRegistros(String tag, List<Map<String,String>> registros) throws ErrorCargaException {
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
