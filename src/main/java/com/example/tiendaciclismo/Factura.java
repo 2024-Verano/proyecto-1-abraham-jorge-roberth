@@ -5,6 +5,9 @@ import java.util.ArrayList;
 
 
 class Factura {
+
+    private final int PORCENTAJE_IMPUESTO = 13;
+
     /**
      * Identificador único asignado secuencialmente.
      */
@@ -113,5 +116,21 @@ class Factura {
 
     public ArrayList<DetalleFactura> getDetalles() {
         return new ArrayList<>(detalles);
+    }
+
+    public void agregarDetalle(long codigoArticulo, int cantidad, int precioUnidad) {
+        int totalDetalle = cantidad * precioUnidad;
+        DetalleFactura detalle = new DetalleFactura(codigoArticulo, this.numero, cantidad, precioUnidad, totalDetalle);
+        detalles.add(detalle);
+
+        int subtotal = 0;
+        for (DetalleFactura detalleFactura : detalles) {
+            subtotal += detalleFactura.getTotal();
+        }
+
+        this.subtotal = subtotal;
+        this.impuesto = subtotal * PORCENTAJE_IMPUESTO / 100;
+
+        this.total = this.subtotal + this.impuesto;
     }
 }
