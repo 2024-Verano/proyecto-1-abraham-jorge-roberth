@@ -128,5 +128,11 @@ public class RegistroCliente {
             registro.put("distrito", cliente.getDistrito());
             registro.put("fecha-nacimiento", cliente.getFechaNacimiento().toString());
         }
+
+        try {
+            respaldo.guardarRegistros("cliente", registros);
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 }
