@@ -22,7 +22,7 @@ class Cliente {
     /**
      * Número de teléfono del cliente. Largo debe de ser 8 dígitos, dígitos a iniciar 2,4,6,8.
      */
-    private int numTelefono;
+    private String numTelefono;
 
     /**
      * Correo del cliente, este debe de tener el formato correcto. (nombre@dominio.com)
@@ -50,7 +50,7 @@ class Cliente {
      */
     private LocalDate fechaNacimiento;
 
-    public Cliente(long codigo, String nombre, String apellidos, int numTelefono, String correo, String provincia, String canton, String distrito, LocalDate fechaNacimiento) {
+    public Cliente(long codigo, String nombre, String apellidos, String numTelefono, String correo, String provincia, String canton, String distrito, LocalDate fechaNacimiento) {
         if (!PROVINCIAS.contains(provincia)) {
             throw new IllegalArgumentException("Provincia inválida: " + provincia);
         }
@@ -85,11 +85,11 @@ class Cliente {
         this.apellidos = apellidos;
     }
 
-    public int getNumTelefono() {
+    public String getNumTelefono() {
         return numTelefono;
     }
 
-    public void setNumTelefono(int numTelefono) {
+    public void setNumTelefono(String numTelefono) {
         this.numTelefono = numTelefono;
     }
 
