@@ -8,12 +8,12 @@ class Factura {
     /**
      * Identificador único asignado secuencialmente.
      */
-    private long numFactura;
+    private long numero;
 
     /**
      * Valor numérico que pertenece a Clientes
      */
-    private Cliente codigoCliente;
+    private long codigoCliente;
 
     /**
      * Fecha en que se recibió.
@@ -23,7 +23,7 @@ class Factura {
     /**
      * El estado valido o anulado. Este valor no puede ser manipulado por el usuario.
      */
-    private boolean estado;
+    private boolean anulado = false;
 
     /**
      * Valor antes de los impuestos
@@ -44,4 +44,74 @@ class Factura {
      * El detalle de la factura
      */
     private ArrayList<DetalleFactura> detalles;
+
+
+    public Factura(long numero, long codigoCliente, LocalDateTime fechaRecibido, int subtotal, int impuesto, int total) {
+        this.numero = numero;
+        this.codigoCliente = codigoCliente;
+        this.fechaRecibido = fechaRecibido;
+        this.subtotal = subtotal;
+        this.impuesto = impuesto;
+        this.total = total;
+    }
+
+    public long getNumero() {
+        return numero;
+    }
+
+    public void setNumero(long numero) {
+        this.numero = numero;
+    }
+
+    public long getCodigoCliente() {
+        return codigoCliente;
+    }
+
+    public void setCodigoCliente(long codigoCliente) {
+        this.codigoCliente = codigoCliente;
+    }
+
+    public LocalDateTime getFechaRecibido() {
+        return fechaRecibido;
+    }
+
+    public void setFechaRecibido(LocalDateTime fechaRecibido) {
+        this.fechaRecibido = fechaRecibido;
+    }
+
+    public boolean isAnulado() {
+        return anulado;
+    }
+
+    public void setAnulado(boolean anulado) {
+        this.anulado = anulado;
+    }
+
+    public int getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(int subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public int getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(int impuesto) {
+        this.impuesto = impuesto;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    public ArrayList<DetalleFactura> getDetalles() {
+        return new ArrayList<>(detalles);
+    }
 }
