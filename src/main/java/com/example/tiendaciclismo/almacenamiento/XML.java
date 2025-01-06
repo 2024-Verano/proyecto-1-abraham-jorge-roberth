@@ -9,4 +9,10 @@ package com.example.tiendaciclismo.almacenamiento;
  * @author Roberth Rojas
  */
 public class XML {
+
+    private File archivo;
+
+    public XML(String nombreArchivo) {
+        archivo = new File(nombreArchivo);
+    }
 }
