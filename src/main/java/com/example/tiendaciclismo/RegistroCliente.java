@@ -1,7 +1,12 @@
 package com.example.tiendaciclismo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+
+import com.example.tiendaciclismo.almacenamiento.XML;
 
 class RegistroCliente {
     /**
@@ -9,8 +14,13 @@ class RegistroCliente {
      */
     private ArrayList<Cliente> clientes;
 
+    private XML respaldo;
+
     public RegistroCliente() {
         clientes = new ArrayList<>();
+        respaldo = new XML("datos/registro_clientes.xml");
+
+        cargarRegistros();
     }
 
     /**
@@ -88,5 +98,23 @@ class RegistroCliente {
         cliente.setNumTelefono(nuevoTelefono);
         cliente.setCorreo(nuevoCorreo);
         System.out.println("Cliente con código " + codigo + " modificado con éxito.");
+    }
+
+    private void cargarRegistros() {
+        List<Map<String,String>> registros = respaldo.leerRegistros("cliente");
+
+        for (Map<String,String> registro : registros) {
+            clientes.add(new Cliente(
+                        Long.parseLong(registro.get("codigo")),
+                        registro.get("nombre"),
+                        registro.get("apellidos"),
+                        registro.get("numTelefono"),
+                        registro.get("correo"),
+                        registro.get("provincia"),
+                        registro.get("canton"),
+                        registro.get("distrito"),
+                        LocalDate.parse(registro.get("fecha-nacimiento"))
+                        ));
+        }
     }
 }
