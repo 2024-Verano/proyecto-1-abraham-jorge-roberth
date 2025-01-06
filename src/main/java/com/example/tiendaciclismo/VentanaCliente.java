@@ -24,6 +24,34 @@ public class VentanaCliente extends javax.swing.JFrame {
     public VentanaCliente() {
         initComponents();
         registroCliente = new RegistroCliente();
+        cargarProvincias();
+    }
+
+    private void cargarProvincias() {
+        for (String provincia : Cliente.PROVINCIAS_CANTONES_DISTRITOS.keySet()) {
+            cbxProvincia.addItem(provincia);
+        }
+
+        cbxProvincia.addActionListener(evt -> cargarCantones());
+    }
+
+    private void cargarCantones() {
+        cbxCanton.removeAllItems();
+        cbxDistrito.removeAllItems();
+        String provinciaSeleccionada = cbxProvincia.getSelectedItem().toString();
+        for (String canton : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada).keySet()) {
+            cbxCanton.addItem(canton);
+        }
+        cbxCanton.addActionListener(evt -> cargarDistritos());
+    }
+
+    private void cargarDistritos() {
+        cbxDistrito.removeAllItems();
+        String provinciaSeleccionada = cbxProvincia.getSelectedItem().toString();
+        String cantonSeleccionado = cbxCanton.getSelectedItem().toString();
+        for (String distrito : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada).get(cantonSeleccionado)) {
+            cbxDistrito.addItem(distrito);
+        }
     }
 
     /**
@@ -44,9 +72,6 @@ public class VentanaCliente extends javax.swing.JFrame {
         txtApellidos = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCorreo = new javax.swing.JTextField();
-        txtProvincia = new javax.swing.JTextField();
-        txtCanton = new javax.swing.JTextField();
-        txtDistrito = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -56,9 +81,11 @@ public class VentanaCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        cbxProvincia = new javax.swing.JComboBox<>();
+        cbxCanton = new javax.swing.JComboBox<>();
+        cbxDistrito = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         btnBuscarCliente = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
         btnEliminarCliente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,18 +134,6 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        txtProvincia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtProvinciaActionPerformed(evt);
-            }
-        });
-
-        txtCanton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantonActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Código");
 
         jLabel2.setText("Apellidos");
@@ -136,6 +151,12 @@ public class VentanaCliente extends javax.swing.JFrame {
         jLabel8.setText("Distrito");
 
         jLabel9.setText("Fecha de Nacimiento (AAAA-MM-DD)");
+
+        cbxProvincia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxProvinciaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,23 +179,24 @@ public class VentanaCliente extends javax.swing.JFrame {
                         .addComponent(btnAgregarCliente)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtProvincia, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCanton, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtDistrito, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(txtNombre)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(cbxDistrito, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxCanton, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxProvincia, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(txtCorreo, javax.swing.GroupLayout.Alignment.LEADING))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(txtNombre)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,15 +228,15 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxCanton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbxDistrito, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,25 +253,6 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(577, Short.MAX_VALUE)
-                .addComponent(btnBuscarCliente)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBuscarCliente)
-                .addContainerGap(528, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Buscar Cliente", jPanel2);
-
         btnEliminarCliente.setText("Eliminar");
         btnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -257,24 +260,28 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(576, Short.MAX_VALUE)
-                .addComponent(btnEliminarCliente)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBuscarCliente, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnEliminarCliente, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(btnBuscarCliente)
+                .addGap(18, 18, 18)
                 .addComponent(btnEliminarCliente)
-                .addContainerGap(528, Short.MAX_VALUE))
+                .addContainerGap(487, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Eliminar Cliente", jPanel3);
+        jTabbedPane1.addTab("Buscar Cliente", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -294,6 +301,55 @@ public class VentanaCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
+        try {
+            long codigo = Long.parseLong(txtCodigo.getText());
+            registroCliente.eliminarCliente(codigo);
+            JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnEliminarClienteActionPerformed
+
+    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
+        try {
+            long codigo = Long.parseLong(txtCodigo.getText());
+            Cliente cliente = registroCliente.buscarPorCodigo(codigo);
+            txtNombre.setText(cliente.getNombre());
+            txtApellidos.setText(cliente.getApellidos());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al buscar cliente: " + e.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarClienteActionPerformed
+
+    private void cbxProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxProvinciaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxProvinciaActionPerformed
+
+    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCorreoActionPerformed
+
+    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtApellidosActionPerformed
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void txtFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaNacimientoActionPerformed
+
     private void btnAgregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarClienteActionPerformed
         try {
             long codigo = Long.parseLong(txtCodigo.getText());
@@ -301,77 +357,18 @@ public class VentanaCliente extends javax.swing.JFrame {
             String apellidos = txtApellidos.getText();
             int telefono = Integer.parseInt(txtTelefono.getText());
             String correo = txtCorreo.getText();
-            String provincia = txtProvincia.getText();
-            String canton = txtCanton.getText();
-            String distrito = txtDistrito.getText();
+            String provincia = cbxProvincia.getSelectedItem().toString();
+            String canton = cbxCanton.getSelectedItem().toString();
+            String distrito = cbxDistrito.getSelectedItem().toString();
             LocalDate fechaNacimiento = LocalDate.parse(txtFechaNacimiento.getText(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             Cliente nuevoCliente = new Cliente(codigo, nombre, apellidos, telefono, correo, provincia, canton, distrito, fechaNacimiento);
             registroCliente.agregarCliente(nuevoCliente);
             JOptionPane.showMessageDialog(this, "Cliente agregado con éxito.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al agregar cliente: " + e.getMessage());
-    }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al agregar cliente: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnAgregarClienteActionPerformed
-
-    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombreActionPerformed
-
-    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void txtApellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidosActionPerformed
-
-    private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefonoActionPerformed
-
-    private void txtProvinciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProvinciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtProvinciaActionPerformed
-
-    private void txtCantonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantonActionPerformed
-
-    private void txtFechaNacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaNacimientoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaNacimientoActionPerformed
-
-    private void btnBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarClienteActionPerformed
-        try {
-        long codigo = Long.parseLong(txtCodigo.getText());
-        Cliente cliente = registroCliente.buscarPorCodigo(codigo);
-        txtNombre.setText(cliente.getNombre());
-        txtApellidos.setText(cliente.getApellidos());
-        txtTelefono.setText(String.valueOf(cliente.getTelefono()));
-        txtCorreo.setText(cliente.getCorreo());
-        txtProvincia.setText(cliente.getProvincia());
-        txtCanton.setText(cliente.getCanton());
-        txtDistrito.setText(cliente.getDistrito());
-        txtFechaNacimiento.setText(cliente.getFechaNacimiento().toString());
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al buscar cliente: " + e.getMessage());
-    }
-    }//GEN-LAST:event_btnBuscarClienteActionPerformed
-
-    private void btnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarClienteActionPerformed
-        try {
-        long codigo = Long.parseLong(txtCodigo.getText());
-        registroCliente.eliminarCliente(codigo);
-        JOptionPane.showMessageDialog(this, "Cliente eliminado con éxito.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error al eliminar cliente: " + e.getMessage());
-    }
-    }//GEN-LAST:event_btnEliminarClienteActionPerformed
-
-    private void txtCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCorreoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -414,6 +411,9 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAgregarCliente;
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnEliminarCliente;
+    private javax.swing.JComboBox<String> cbxCanton;
+    private javax.swing.JComboBox<String> cbxDistrito;
+    private javax.swing.JComboBox<String> cbxProvincia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -425,16 +425,12 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtCanton;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCorreo;
-    private javax.swing.JTextField txtDistrito;
     private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtProvincia;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
