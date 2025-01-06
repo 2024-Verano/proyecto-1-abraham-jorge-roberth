@@ -217,7 +217,7 @@ class RegistroTipoProducto {
         }
 
         try {
-            respaldo.guardarRegistros("cliente", registros);
+            respaldo.guardarRegistros("tipo-producto", registros);
         } catch (Exception e) {
             System.err.println(e);
         }
