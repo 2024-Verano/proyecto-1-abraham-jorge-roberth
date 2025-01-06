@@ -21,7 +21,7 @@ public class RegistroCliente {
     }
 
     public void agregarCliente(Cliente nuevoCliente) throws Exception {
-        if (nuevoCliente.getNombre().isEmpty() || nuevoCliente.getApellidos().isEmpty() || nuevoCliente.getTelefono() == 0 || nuevoCliente.getCorreo().isEmpty() || nuevoCliente.getProvincia().isEmpty() || nuevoCliente.getCanton().isEmpty() || nuevoCliente.getDistrito().isEmpty() || nuevoCliente.getFechaNacimiento() == null) {
+        if (nuevoCliente.getNombre().isEmpty() || nuevoCliente.getApellidos().isEmpty() || nuevoCliente.getTelefono() .isEmpty() || nuevoCliente.getCorreo().isEmpty() || nuevoCliente.getProvincia().isEmpty() || nuevoCliente.getCanton().isEmpty() || nuevoCliente.getDistrito().isEmpty() || nuevoCliente.getFechaNacimiento() == null) {
             throw new Exception("Todos los campos son obligatorios.");
         }
         for (Cliente cliente : clientes) {
@@ -32,7 +32,7 @@ public class RegistroCliente {
         clientes.add(nuevoCliente);
     }
 
-    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, int nuevoTelefono, String nuevoCorreo, String nuevaProvincia, String nuevoCanton, String nuevoDistrito, LocalDate nuevaFechaNacimiento) throws Exception {
+    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, String nuevoTelefono, String nuevoCorreo, String nuevaProvincia, String nuevoCanton, String nuevoDistrito, LocalDate nuevaFechaNacimiento) throws Exception {
         Cliente cliente = buscarPorCodigo(codigo);
         cliente.setNombre(nuevoNombre);
         cliente.setApellidos(nuevosApellidos);

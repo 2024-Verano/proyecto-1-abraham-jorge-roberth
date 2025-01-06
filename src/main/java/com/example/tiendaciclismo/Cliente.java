@@ -20,7 +20,7 @@ public class Cliente {
     private long codigo;
     private String nombre;
     private String apellidos;
-    private int telefono;
+    private String telefono;
     private String correo;
     private String provincia;
     private String canton;
@@ -130,7 +130,7 @@ public class Cliente {
         
     }    
 
-    public Cliente(long codigo, String nombre, String apellidos, int telefono, String correo, String provincia, String canton, String distrito, LocalDate fechaNacimiento) {
+    public Cliente(long codigo, String nombre, String apellidos, String telefono, String correo, String provincia, String canton, String distrito, LocalDate fechaNacimiento) {
         if (!PROVINCIAS_CANTONES_DISTRITOS.containsKey(provincia)) {
             throw new IllegalArgumentException("Provincia inválida: " + provincia);
         }
@@ -157,8 +157,8 @@ public class Cliente {
     public void setNombre(String nombre) { this.nombre = nombre.trim(); }
     public String getApellidos() { return apellidos; }
     public void setApellidos(String apellidos) { this.apellidos = apellidos.trim(); }
-    public int getTelefono() { return telefono; }
-    public void setTelefono(int telefono) { this.telefono = telefono; }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
     public String getCorreo() { return correo; }
     public void setCorreo(String correo) { this.correo = correo; }
     public String getProvincia() { return provincia; }

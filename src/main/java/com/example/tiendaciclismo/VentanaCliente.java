@@ -311,7 +311,7 @@ public class VentanaCliente extends javax.swing.JFrame {
             long codigo = Long.parseLong(txtCodigo.getText());
             String nombre = txtNombre.getText();
             String apellidos = txtApellidos.getText();
-            int telefono = Integer.parseInt(txtTelefono.getText());
+            String telefono = txtTelefono.getText();
             String correo = txtCorreo.getText();
             String provincia = cbxProvincia.getSelectedItem().toString();
             String canton = cbxCanton.getSelectedItem().toString();
@@ -417,7 +417,7 @@ public class VentanaCliente extends javax.swing.JFrame {
             long codigo = Long.parseLong(txtCodigo.getText());
             String nombre = txtNombre.getText();
             String apellidos = txtApellidos.getText();
-            int telefono = Integer.parseInt(txtTelefono.getText());
+            String telefono = txtTelefono.getText();
             String correo = txtCorreo.getText();
             String provincia = cbxProvincia.getSelectedItem().toString();
             String canton = cbxCanton.getSelectedItem().toString();
