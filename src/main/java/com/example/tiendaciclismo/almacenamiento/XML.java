@@ -5,6 +5,9 @@
 package com.example.tiendaciclismo.almacenamiento;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +15,13 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -58,5 +66,42 @@ public class XML {
         }
 
         return registros;
+    }
+
+    public void guardarRegistros(String tag, List<Map<String,String>> registros) throws ErrorCargaException {
+        try {
+            DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder(); 
+            Document document = builder.newDocument();
+
+            Element root = document.createElement("tienda-ciclismo");
+            document.appendChild(root);
+
+            for (Map<String,String> registro : registros) {
+                Element elemento = document.createElement(tag);
+
+                for (String nombre : registro.keySet()) {
+                    elemento.setAttribute(nombre, registro.get(nombre));
+                }
+
+                root.appendChild(elemento);
+            }
+
+            FileWriter fileWriter = new FileWriter(archivo);
+
+            try (PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+
+                StringWriter writer = new StringWriter();
+
+                transformer.transform(new DOMSource(document), new StreamResult(writer));
+                printWriter.print(writer.toString());
+            }
+
+        } catch (Exception e) {
+            throw new ErrorCargaException(archivo.getName());
+        }
+
+
     }
 }
