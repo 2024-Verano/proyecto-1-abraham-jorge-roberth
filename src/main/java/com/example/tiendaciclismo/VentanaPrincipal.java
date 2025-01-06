@@ -39,7 +39,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         }
                 });
 
-                jButton3.setText("Productos");
+                jButton3.setText("Tipos de Producto");
                 jButton3.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 jButton3ActionPerformed(evt);
@@ -85,7 +85,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }//GEN-LAST:event_jButton1ActionPerformed
 
         private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-                // TODO add your handling code here:
+		VentanaTProductos.create();
         }//GEN-LAST:event_jButton3ActionPerformed
 
         private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
