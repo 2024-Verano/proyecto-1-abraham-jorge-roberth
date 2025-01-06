@@ -58,16 +58,8 @@ public class VentanaCliente extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnBuscarCliente = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        txtCodigo2 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        txtApellidos2 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        txtNombre2 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnEliminarCliente = new javax.swing.JButton();
-        jLabel13 = new javax.swing.JLabel();
-        txtCodigo3 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -239,51 +231,12 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Código");
-
-        txtCodigo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigo2ActionPerformed(evt);
-            }
-        });
-
-        jLabel11.setText("Apellidos");
-
-        txtApellidos2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtApellidos2ActionPerformed(evt);
-            }
-        });
-
-        jLabel12.setText("Nombre");
-
-        txtNombre2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNombre2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(39, 39, 39))
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCodigo2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtApellidos2)
-                                .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(96, 96, 96)))
-                .addGap(235, 235, 235)
+                .addContainerGap(577, Short.MAX_VALUE)
                 .addComponent(btnBuscarCliente)
                 .addContainerGap())
         );
@@ -291,21 +244,8 @@ public class VentanaCliente extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCodigo2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNombre2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtApellidos2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarCliente))
-                .addContainerGap(383, Short.MAX_VALUE))
+                .addComponent(btnBuscarCliente)
+                .addContainerGap(528, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Buscar Cliente", jPanel2);
@@ -317,14 +257,6 @@ public class VentanaCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel13.setText("Código");
-
-        txtCodigo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCodigo3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -333,13 +265,6 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addContainerGap(576, Short.MAX_VALUE)
                 .addComponent(btnEliminarCliente)
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(159, 159, 159)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtCodigo3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(256, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -347,13 +272,6 @@ public class VentanaCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnEliminarCliente)
                 .addContainerGap(528, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(194, 194, 194)
-                    .addComponent(jLabel13)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(txtCodigo3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(319, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Eliminar Cliente", jPanel3);
@@ -364,13 +282,13 @@ public class VentanaCliente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 76, Short.MAX_VALUE))
+                .addGap(0, 73, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addGap(0, 52, Short.MAX_VALUE))
         );
 
         pack();
@@ -455,22 +373,6 @@ public class VentanaCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
-    private void txtCodigo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigo2ActionPerformed
-
-    private void txtApellidos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApellidos2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtApellidos2ActionPerformed
-
-    private void txtNombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombre2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNombre2ActionPerformed
-
-    private void txtCodigo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodigo3ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -513,10 +415,6 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnBuscarCliente;
     private javax.swing.JButton btnEliminarCliente;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -530,16 +428,12 @@ public class VentanaCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextField txtApellidos;
-    private javax.swing.JTextField txtApellidos2;
     private javax.swing.JTextField txtCanton;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCodigo2;
-    private javax.swing.JTextField txtCodigo3;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDistrito;
     private javax.swing.JTextField txtFechaNacimiento;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre2;
     private javax.swing.JTextField txtProvincia;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

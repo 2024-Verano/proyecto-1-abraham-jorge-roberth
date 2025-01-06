@@ -24,6 +24,11 @@ public class RegistroCliente {
         if (nuevoCliente.getNombre().isEmpty() || nuevoCliente.getApellidos().isEmpty() || nuevoCliente.getTelefono() == 0 || nuevoCliente.getCorreo().isEmpty() || nuevoCliente.getProvincia().isEmpty() || nuevoCliente.getCanton().isEmpty() || nuevoCliente.getDistrito().isEmpty() || nuevoCliente.getFechaNacimiento() == null) {
             throw new Exception("Todos los campos son obligatorios.");
         }
+        for (Cliente cliente : clientes) {
+            if (cliente.getCodigo() == nuevoCliente.getCodigo()) {
+                throw new Exception("Ya existe un cliente con el código proporcionado.");
+            }
+        }
         clientes.add(nuevoCliente);
     }
 
