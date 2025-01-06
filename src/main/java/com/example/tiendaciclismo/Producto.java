@@ -2,30 +2,33 @@ package com.example.tiendaciclismo;
 
 
 class Producto {
-    private static long siguienteCodigoArticulo = 1;
+    
 
-    private long codigoArticulo;
+    private long codigoArt;
     private long codigoTipo;
     private int tamano;
-    private int marca;
+    private String marca;
     private int precio;
     private int cantidad;
     private String nombre;
 
-    public Producto(long codigoTipo, int tamano, int marca, int precio, int cantidad, String nombre) throws Exception {
+    public Producto(long codigoArt, long codigoTipo, int tamano, String marca, int precio, int cantidad, String nombre) throws Exception {
         setCodigoTipo(codigoTipo);
         setTamano(tamano);
         setMarca(marca);
         setPrecio(precio);
         setCantidad(cantidad);
         setNombre(nombre);
-        this.codigoArticulo = siguienteCodigoArticulo++;
+        setCodigoArticulo(codigoArt);
+        
     }
 
     public long getCodigoArticulo() {
-        return codigoArticulo;
+        return codigoArt;
     }
-
+public void setCodigoArticulo(long codigoArt){
+    this.codigoArt = codigoArt;
+}
     public long getCodigoTipo() {
         return codigoTipo;
     }
@@ -48,14 +51,12 @@ class Producto {
         this.tamano = tamano;
     }
 
-    public int getMarca() {
+    public String getMarca() {
         return marca;
     }
 
-    public void setMarca(int marca) throws Exception {
-        if (marca <= 0) {
-            throw new Exception("La marca debe ser un número positivo.");
-        }
+    public void setMarca(String marca) throws Exception {
+        
         this.marca = marca;
     }
 
