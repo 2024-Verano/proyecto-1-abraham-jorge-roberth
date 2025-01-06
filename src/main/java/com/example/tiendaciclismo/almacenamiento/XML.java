@@ -50,7 +50,7 @@ public class XML {
      * @param tag El nombre de las etiquetas a cargar.
      * @return Una lista de mapas con los atributos de los registros.
      */
-    public List<Map<String, String>> leerRegistros(String tag) throws ErrorCargaException {
+    public List<Map<String, String>> leerRegistros(String tag) {
         ArrayList<Map<String, String>> registros = new ArrayList<Map<String, String>>();
 
         try {
@@ -74,7 +74,7 @@ public class XML {
                 registros.add(registro);
             }
         } catch (Exception e) {
-            throw new ErrorCargaException(archivo.getName());
+            // No hacer nada. Si el archivo no existe, retornar una lista de registros vacía
         }
 
         return registros;
