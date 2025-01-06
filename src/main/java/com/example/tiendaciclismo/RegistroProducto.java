@@ -28,17 +28,18 @@ class RegistroProducto {
      * Lista de los productos creados.
      */
     private ArrayList<Producto> productos = new ArrayList<>();
+private static long siguienteCodigoArticulo = 1;
 
     /**
      * Crea un producto y lo almacena en productos.
      */
-    public Producto agregarProducto(long codigoTipo, int tamano, int marca, int precio, int cantidad, String nombre) throws Exception {
-        Producto producto = new Producto(codigoTipo, tamano, marca, precio, cantidad, nombre);
+    public Producto agregarProducto(long codigoTipo, int tamano, String marca, int precio, int cantidad, String nombre) throws Exception {
+        long codigoArticulo = siguienteCodigoArticulo++;
+        Producto producto = new Producto(codigoArticulo, codigoTipo, tamano, marca, precio, cantidad, nombre);
         productos.add(producto);
         guardarProductos(); // Guardar los cambios en el archivo XML
         return producto;
     }
-
     /**
      * Busca un producto por nombre.
      */
@@ -88,7 +89,7 @@ class RegistroProducto {
                 producto.setTamano((Integer) nuevoValor);
                 break;
             case "marca":
-                producto.setMarca((Integer) nuevoValor);
+                producto.setMarca((String) nuevoValor);
                 break;
             case "precio":
                 producto.setPrecio((Integer) nuevoValor);
@@ -115,38 +116,39 @@ class RegistroProducto {
     /**
      * Carga los productos desde un archivo.
      */
-    private void cargarProductos() throws Exception {
-        try {
-            File xmlFile = new File("C:\\Users\\solan\\OneDrive\\Documents\\Proyecto1_POO\\proyecto-1-abraham-jorge-roberth\\productos.xml");
+    public void cargarProductos() throws Exception {
+    try {
+        File xmlFile = new File("C:\\Users\\solan\\OneDrive\\Documents\\Proyecto1_POO\\proyecto-1-abraham-jorge-roberth\\productos.xml");
 
-            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder builder = factory.newDocumentBuilder();
-            Document document = builder.parse(xmlFile);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(xmlFile);
 
-            NodeList productoNodes = document.getElementsByTagName("producto");
+        NodeList productoNodes = document.getElementsByTagName("producto");
 
-            for (int i = 0; i < productoNodes.getLength(); i++) {
-                Node productoNode = productoNodes.item(i);
+        for (int i = 0; i < productoNodes.getLength(); i++) {
+            Node productoNode = productoNodes.item(i);
 
-                if (productoNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element elementoProducto = (Element) productoNode;
+            if (productoNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element elementoProducto = (Element) productoNode;
 
-                    long codigoTipo = Long.parseLong(elementoProducto.getElementsByTagName("codigoTipo").item(0).getTextContent());
-                    int tamano = Integer.parseInt(elementoProducto.getElementsByTagName("tamano").item(0).getTextContent());
-                    int marca = Integer.parseInt(elementoProducto.getElementsByTagName("marca").item(0).getTextContent());
-                    int precio = Integer.parseInt(elementoProducto.getElementsByTagName("precio").item(0).getTextContent());
-                    int cantidad = Integer.parseInt(elementoProducto.getElementsByTagName("cantidad").item(0).getTextContent());
-                    String nombre = elementoProducto.getElementsByTagName("nombre").item(0).getTextContent();
+                long codigoArticulo = elementoProducto.getElementsByTagName("codigoArticulo").item(0) != null ? Long.parseLong(elementoProducto.getElementsByTagName("codigoArticulo").item(0).getTextContent()) : 0;
+                long codigoTipo = elementoProducto.getElementsByTagName("codigoTipo").item(0) != null ? Long.parseLong(elementoProducto.getElementsByTagName("codigoTipo").item(0).getTextContent()) : 0;
+                int tamano = elementoProducto.getElementsByTagName("tamano").item(0) != null ? Integer.parseInt(elementoProducto.getElementsByTagName("tamano").item(0).getTextContent()) : 0;
+                String marca = elementoProducto.getElementsByTagName("marca").item(0) != null ? elementoProducto.getElementsByTagName("marca").item(0).getTextContent() : "";
+                int precio = elementoProducto.getElementsByTagName("precio").item(0) != null ? Integer.parseInt(elementoProducto.getElementsByTagName("precio").item(0).getTextContent()) : 0;
+                int cantidad = elementoProducto.getElementsByTagName("cantidad").item(0) != null ? Integer.parseInt(elementoProducto.getElementsByTagName("cantidad").item(0).getTextContent()) : 0;
+                String nombre = elementoProducto.getElementsByTagName("nombre").item(0) != null ? elementoProducto.getElementsByTagName("nombre").item(0).getTextContent() : "";
 
-                    Producto producto = new Producto(codigoTipo, tamano, marca, precio, cantidad, nombre);
-                    productos.add(producto);
-                }
+                Producto producto = new Producto(codigoArticulo, codigoTipo, tamano, marca, precio, cantidad, nombre);
+                productos.add(producto);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Error al cargar los productos desde el archivo.");
         }
+    } catch (Exception e) {
+        e.printStackTrace();
+        throw new Exception("Error al cargar los productos desde el archivo.");
     }
+}
 
     /**
      * Guarda los productos a un archivo.
@@ -162,6 +164,10 @@ class RegistroProducto {
 
             for (Producto producto : productos) {
                 Element productoElement = document.createElement("producto");
+
+                Element codigoArticuloElement = document.createElement("codigoArticulo");
+                codigoArticuloElement.appendChild(document.createTextNode(String.valueOf(producto.getCodigoArticulo())));
+                productoElement.appendChild(codigoArticuloElement);
 
                 Element codigoTipoElement = document.createElement("codigoTipo");
                 codigoTipoElement.appendChild(document.createTextNode(String.valueOf(producto.getCodigoTipo())));
@@ -219,7 +225,7 @@ class RegistroProducto {
     }
 
     private void validarEntrada(String entrada) throws Exception {
-        if (entrada == null || entrada.equals(entrada.trim())) {
+        if (entrada == null || !entrada.equals(entrada.trim())) {
             throw new Exception("La entrada no puede estar vacía.");
         }
     }
@@ -229,4 +235,59 @@ class RegistroProducto {
             throw new Exception("El código debe ser un número positivo.");
         }
     }
+    /**
+ * Elimina un producto por código.
+ */
+public boolean eliminarProductoPorCodigo(long codigo) throws Exception {
+    validarCodigo(codigo);
+    cargarProductos();
+    for (Producto producto : productos) {
+        if (producto.getCodigoArticulo() == codigo) {
+            productos.remove(producto);
+            guardarProductos();
+            return true;
+        }
+    }
+
+    throw new Exception("No se encontró un producto con el código especificado.");
+}
+
+/**
+ * Elimina un producto por nombre.
+ */
+public boolean eliminarProductoPorNombre(String nombre) throws Exception {
+    validarEntrada(nombre);
+
+    for (Producto producto : productos) {
+        if (producto.getNombre().equalsIgnoreCase(nombre)) {
+            productos.remove(producto);
+            guardarProductos();
+            return true;
+        }
+    }
+
+    throw new Exception("No se encontraron productos con el nombre especificado.");
+}
+public String buscarProductoPorNombreYObtenerInfo(String nombre) throws Exception {
+            validarEntrada(nombre);
+            for (Producto producto : productos) {
+                if (producto.getNombre().equalsIgnoreCase(nombre)) {
+                    return producto.toString();
+                }
+            }
+            throw new Exception("No se encontraron productos con el nombre especificado.");
+        }
+
+        /**
+         * Busca un producto por código y devuelve su información.
+         */
+        public String buscarProductoPorCodigoYObtenerInfo(long codigo) throws Exception {
+            validarCodigo(codigo);
+            for (Producto producto : productos) {
+                if (producto.getCodigoArticulo() == codigo) {
+                    return producto.toString();
+                }
+            }
+            throw new Exception("No se encontró un producto con el código especificado.");
+        }
 }

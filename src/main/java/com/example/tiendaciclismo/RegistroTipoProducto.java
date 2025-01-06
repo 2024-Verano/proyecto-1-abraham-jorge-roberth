@@ -8,6 +8,8 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -263,7 +265,30 @@ class RegistroTipoProducto {
         } catch (IOException | ParserConfigurationException | DOMException e) {
         }
     }
+    /**
+    **
+     * Devuelve una lista de TipoProducto para ser utilizada en un JComboBox.
+     *
+     * @return DefaultComboBoxModel<TipoProducto>
+     */
+    public DefaultComboBoxModel<TipoProducto> obtenerTiposComboBox() {
+        DefaultComboBoxModel<TipoProducto> model = new DefaultComboBoxModel<>();
 
+        for (TipoProducto tipo : listaTipos) {
+            model.addElement(tipo);
+        }
+
+        return model;
+    }
+
+    /**
+     * Método para crear y retornar un JComboBox con los tipos de producto.
+     *
+     * @return JComboBox<TipoProducto>
+     */
+    public JComboBox<TipoProducto> crearComboBoxTipos() {
+        return new JComboBox<>(obtenerTiposComboBox());
+    }
     private String documentToString(Document document) {
         // Transformar el documento XML en una cadena de texto
         try {
