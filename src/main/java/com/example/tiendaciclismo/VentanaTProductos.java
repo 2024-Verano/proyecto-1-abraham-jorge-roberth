@@ -31,7 +31,6 @@ public class VentanaTProductos extends javax.swing.JFrame {
      * Creates new form VentanaTProductos
      */
     public VentanaTProductos() {
-        registro.cargarTipos();
         initComponents();
         busquedaTable.setModel(new DefaultTableModel(
                 new Object[][]{},
@@ -659,7 +658,6 @@ public class VentanaTProductos extends javax.swing.JFrame {
             addTf.setText("");
         } else {
             registro.agregarTipoProducto(nombre);
-            registro.guardarTipos();
 
             JOptionPane.showMessageDialog(this, "Se ha cargado exitosamente.");
 
