@@ -1,21 +1,53 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package com.example.tiendaciclismo;
 
+/**
+ *
+ * @author jorge
+ */
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
-class RegistroCliente {
-    /**
-     * Lista de los clientes creados
-     */
-    private ArrayList<Cliente> clientes;
+public class RegistroCliente {
+    private List<Cliente> clientes;
 
     public RegistroCliente() {
         clientes = new ArrayList<>();
     }
 
-    /**
-     * Se busca al cliente por codigo.
-     */
+    public void agregarCliente(Cliente nuevoCliente) throws Exception {
+        if (nuevoCliente.getNombre().isEmpty() || nuevoCliente.getApellidos().isEmpty() || nuevoCliente.getTelefono() == 0 || nuevoCliente.getCorreo().isEmpty() || nuevoCliente.getProvincia().isEmpty() || nuevoCliente.getCanton().isEmpty() || nuevoCliente.getDistrito().isEmpty() || nuevoCliente.getFechaNacimiento() == null) {
+            throw new Exception("Todos los campos son obligatorios.");
+        }
+        clientes.add(nuevoCliente);
+    }
+
+    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, int nuevoTelefono, String nuevoCorreo, String nuevaProvincia, String nuevoCanton, String nuevoDistrito, LocalDate nuevaFechaNacimiento) throws Exception {
+        Cliente cliente = buscarPorCodigo(codigo);
+        cliente.setNombre(nuevoNombre);
+        cliente.setApellidos(nuevosApellidos);
+        cliente.setTelefono(nuevoTelefono);
+        cliente.setCorreo(nuevoCorreo);
+        cliente.setProvincia(nuevaProvincia);
+        cliente.setCanton(nuevoCanton);
+        cliente.setDistrito(nuevoDistrito);
+        cliente.setFechaNacimiento(nuevaFechaNacimiento);
+    }
+
+    public void eliminarCliente(long codigo) throws Exception {
+        Cliente cliente = buscarPorCodigo(codigo);
+        // Verificar si el cliente tiene facturas asociadas (simulación)
+        if (verificarFacturas(cliente)) {
+            throw new Exception("No se puede eliminar el cliente con código " + codigo + ", tiene facturas asociadas.");
+        }
+        clientes.remove(cliente);
+    }
+
     public Cliente buscarPorCodigo(long codigo) throws Exception {
         return clientes.stream()
                 .filter(cliente -> cliente.getCodigo() == codigo)
@@ -23,9 +55,6 @@ class RegistroCliente {
                 .orElseThrow(() -> new Exception("Cliente con código " + codigo + " no encontrado."));
     }
 
-    /**
-     * Se busca al cliente por su nombre
-     */
     public Cliente buscarPorNombre(String nombre) throws Exception {
         return clientes.stream()
                 .filter(cliente -> cliente.getNombre().equalsIgnoreCase(nombre))
@@ -33,9 +62,6 @@ class RegistroCliente {
                 .orElseThrow(() -> new Exception("Cliente con nombre " + nombre + " no encontrado."));
     }
 
-    /**
-     * Se busca al cliente por sus apellidos
-     */
     public Cliente buscarPorApellidos(String apellidos) throws Exception {
         return clientes.stream()
                 .filter(cliente -> cliente.getApellidos().equalsIgnoreCase(apellidos))
@@ -43,50 +69,8 @@ class RegistroCliente {
                 .orElseThrow(() -> new Exception("Cliente con apellidos " + apellidos + " no encontrado."));
     }
 
-    /**
-     * Se revisa si tiene facturas, si ya tiene no podrá ser eliminado
-     */
-    private boolean verificarFacturas(long codigo) {
+    private boolean verificarFacturas(Cliente cliente) {
         // Simulación de verificación de facturas. Reemplazar con lógica real
         return false;
-    }
-
-    /**
-     * Se elimina el cliente.
-     */
-    public void eliminarCliente(long codigo) throws Exception {
-        if (verificarFacturas(codigo)) {
-            throw new Exception("No se puede eliminar el cliente con código " + codigo + ", tiene facturas asociadas.");
-        }
-        Cliente cliente = buscarPorCodigo(codigo);
-        clientes.remove(cliente);
-        System.out.println("Cliente con código " + codigo + " eliminado con éxito.");
-    }
-
-    /**
-     * Se agrega a un nuevo cliente
-     */
-    public void agregarCliente(Cliente nuevoCliente) throws Exception {
-        Optional<Cliente> clienteExistente = clientes.stream()
-                .filter(cliente -> cliente.getCodigo() == nuevoCliente.getCodigo())
-                .findFirst();
-
-        if (clienteExistente.isPresent()) {
-            throw new Exception("Ya existe un cliente con el código " + nuevoCliente.getCodigo() + ".");
-        }
-        clientes.add(nuevoCliente);
-        System.out.println("Cliente agregado con éxito.");
-    }
-
-    /**
-     * Se modifican atributos del cliente
-     */
-    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, int nuevoTelefono, String nuevoCorreo) throws Exception {
-        Cliente cliente = buscarPorCodigo(codigo);
-        cliente.setNombre(nuevoNombre);
-        cliente.setApellidos(nuevosApellidos);
-        cliente.setNumTelefono(nuevoTelefono);
-        cliente.setCorreo(nuevoCorreo);
-        System.out.println("Cliente con código " + codigo + " modificado con éxito.");
     }
 }
