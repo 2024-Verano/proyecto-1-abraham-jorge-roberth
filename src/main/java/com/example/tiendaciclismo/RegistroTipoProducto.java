@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -323,6 +324,24 @@ class RegistroTipoProducto {
 
         for (Map<String,String> registro : registros) {
             listaTipos.add(new TipoProducto(Long.parseLong(registro.get("codigo")), registro.get("nombre")));
+        }
+    }
+
+    private void guardarRegistros() {
+        List<Map<String,String>> registros = new ArrayList<Map<String,String>>();
+
+        for (TipoProducto tipo : listaTipos) {
+            Map<String,String> registro = new HashMap<>();
+            registro.put("codigo", String.valueOf(tipo.getCodigo()));
+            registro.put("nombre", tipo.getNombre());
+
+            registros.add(registro);
+        }
+
+        try {
+            respaldo.guardarRegistros("cliente", registros);
+        } catch (Exception e) {
+            System.err.println(e);
         }
     }
 }
