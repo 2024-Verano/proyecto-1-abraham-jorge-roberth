@@ -109,8 +109,8 @@ public class VentanaInicioSesion extends javax.swing.JFrame {
 		Boolean autenticado = tienda.iniciarSesion(nombreUsuario, contrasena);
 
 		if (autenticado) {
-			this.setVisible(false);
-			TiendaCiclismo.ejecutarAplicacionPrincipal();
+			VentanaPrincipal.create();
+			this.dispose();
 		} else {
 			this.fieldUsuario.setText("");
 			this.pwFieldPassword.setText("");
