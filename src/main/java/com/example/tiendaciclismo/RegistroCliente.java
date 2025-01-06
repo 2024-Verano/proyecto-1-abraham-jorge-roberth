@@ -127,6 +127,8 @@ public class RegistroCliente {
             registro.put("canton", cliente.getCanton());
             registro.put("distrito", cliente.getDistrito());
             registro.put("fecha-nacimiento", cliente.getFechaNacimiento().toString());
+
+            registros.add(registro);
         }
 
         try {
