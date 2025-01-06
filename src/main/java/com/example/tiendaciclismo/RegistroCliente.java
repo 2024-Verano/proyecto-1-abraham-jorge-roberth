@@ -96,7 +96,7 @@ class RegistroCliente {
     /**
      * Se modifican atributos del cliente
      */
-    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, String nuevoTelefono, String nuevoCorreo) throws Exception {
+    public void modificarCliente(long codigo, String nuevoNombre, String nuevosApellidos, int nuevoTelefono, String nuevoCorreo) throws Exception {
         Cliente cliente = buscarPorCodigo(codigo);
         cliente.setNombre(nuevoNombre);
         cliente.setApellidos(nuevosApellidos);
