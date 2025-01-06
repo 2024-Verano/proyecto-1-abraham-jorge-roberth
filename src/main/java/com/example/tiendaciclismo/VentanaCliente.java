@@ -38,19 +38,24 @@ public class VentanaCliente extends javax.swing.JFrame {
     private void cargarCantones() {
         cbxCanton.removeAllItems();
         cbxDistrito.removeAllItems();
-        String provinciaSeleccionada = cbxProvincia.getSelectedItem().toString();
-        for (String canton : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada).keySet()) {
-            cbxCanton.addItem(canton);
+
+        Object provinciaSeleccionada = cbxProvincia.getSelectedItem();
+        if (provinciaSeleccionada != null) {
+            for (String canton : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada.toString()).keySet()) {
+                cbxCanton.addItem(canton);
+            }
         }
         cbxCanton.addActionListener(evt -> cargarDistritos());
     }
 
     private void cargarDistritos() {
         cbxDistrito.removeAllItems();
-        String provinciaSeleccionada = cbxProvincia.getSelectedItem().toString();
-        String cantonSeleccionado = cbxCanton.getSelectedItem().toString();
-        for (String distrito : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada).get(cantonSeleccionado)) {
-            cbxDistrito.addItem(distrito);
+        Object provinciaSeleccionada = cbxProvincia.getSelectedItem();
+        Object cantonSeleccionado = cbxCanton.getSelectedItem();
+        if (provinciaSeleccionada != null && cantonSeleccionado != null) {
+            for (String distrito : Cliente.PROVINCIAS_CANTONES_DISTRITOS.get(provinciaSeleccionada.toString()).get(cantonSeleccionado.toString())) {
+                cbxDistrito.addItem(distrito);
+            }
         }
     }
 
